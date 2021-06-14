@@ -1,6 +1,6 @@
 ## Music Downloader
 
-Dowload music from Spotify/Youtube Playlist locally.
+Download music from Spotify/Youtube Playlist locally.
 
 ## Table of Contents
 
