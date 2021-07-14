@@ -2,51 +2,56 @@
 
 """ Class which download songs/books not in a repository from a url """
 
-import time
-import os
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
+import youtube_dl
+import pandas as pd
 
 
 class Downloader:
-    def __init__(self, downloadPath, titles):
+    def __init__(self, downloadPath, csv_path):
         """
-        url: website in where we want to download
         downloadPath: absolute path where files should be downloaded
-        titles: list of songs/books to be dowloaded
+        df: dataframe of the songs that should be downloaded
         """
-        #  self.url = url
         self.downloadPath = downloadPath
-        self.titles = titles
+        self.csv_path = csv_path
+        self.df = self.read_csv_file()
+        self.ydl_opts = {
+            #  'outtmpl': 'C:/Users/emuli/Downloads/',
+            #  'outtmpl': '/tmp/foo_%(title)s-%(id)s.%(ext)s',
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'keepvideo': False
+        }
 
-    def isInDirectory(self, title):
-        """ Check is song/book is in directory provided (recursive check) """
-        pass
+    def read_csv_file(self):  # refractor in CSVManager?
+        """docstring for read_csv_file"""
+        df = pd.read_csv(self.csv_path, sep=',')
+        return df
 
-    def downloadFromMP3Juice(self):
-        """ Download a song not in the directory from MP3Juice"""
-        # initializing chrome as web browser
-        url = "https://www.mp3juices.cc/"
-        options = webdriver.ChromeOptions()
-        driver = webdriver.Chrome(chrome_options=options)
-        driver.get(url)  # opening the website
+    def download_songs(self):
+        """ Download songs if it hasn't been downloaded before """
+        for index, row in self.df.iterrows():
+            if row["isDownloaded"] == False:
+                print("Downloading " + row["artist"] + " " + row["title"])
+                #  save mp3 as artist+title
+                file_name = row["artist"] + '-' + row["title"] + '.mp3'
+                self.ydl_opts["outtmpl"] = self.downloadPath + file_name
+                with youtube_dl.YoutubeDL(self.ydl_opts) as ydl:
+                    #  download songs
+                    song_url = row["url"]
+                    ydl.download([song_url])
+                    #  set isDownloaded to true
+                    #  save updated csv file
 
-        # Download all songs not in download directory
-        for title in self.titles:
-            if not isInDirectory(title):
-                # Download the first entry
-                download_button = driver.find_element_by_name('download')
-                download_button.click()
-
-    def downloadFromPDFDrive(self):
-        """ Download a book not in the directory from PDFDrive"""
-        pass
-
-    def downloadFromZLib(self):
-        """ Download a book not in the directory from ZLib"""
+    def save_df_to_csv(self):
         pass
 
 
 if __name__ == "__main__":
-    downloader = Downloader("C:/Downloads", ['mgk'])
-    downloader.downloadFromMP3Juice()
+    downloader = Downloader(downloadPath="C:/Users/emuli/Downloads/",
+                            csv_path="Playlist/playlists.csv")
+    downloader.download_songs()
