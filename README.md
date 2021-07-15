@@ -13,11 +13,13 @@ Download music from Spotify/Youtube Playlist locally using youtube-dll pluggin
 ## [Requirements](#requirements)
 ## [Features](#features)
 
-- [ ] Download Songs from Youtube Playlist
+Main Features:
+- [X] Download Songs from Youtube Playlist
+- [ ] Check if songs is already downloaded before downloading it
+
+
+More:
 - [ ] Download Songs from Spotify Playlist
-- [ ] Download Missing Songs from Youtube Playlist
-- [ ] Download Songs from text file
-- [ ] Duplicate Playlist
 - [ ] Download Books
 - [ ] Download Movies
 
@@ -26,8 +28,8 @@ Download music from Spotify/Youtube Playlist locally using youtube-dll pluggin
 #### Step 1: Create virtual environment with venv
 
 
-`` python3 -m venv music-downloader-venv \\
-source music-downloader-venv/bin/activate ``
+`` python3 -m venv music-downloader-venv``
+`` source music-downloader-venv/bin/activate ``
 
 Source: [How to create virtual environment in Python](https://linuxize.com/post/how-to-create-python-virtual-environments-on-ubuntu-18-04/)
 
@@ -50,16 +52,14 @@ On Ubuntu: ``sudo apt-get install ffmpeg``
 ## [Classes](#classes)
 
 - [X] Downloader: download all songs from CSV file if they are not already downloaded
+- [X] GeneratorCSV: generate csv file with playlist meta data from youtube music playlist
 - [ ] Playlister: from download directory, generate playlist from csv file
-- [ ] GeneratorCSV:
-%% - [ ] CSVManager:
 
 ## [Ressources](#ressources)
 
-- PDF Drive
-- MP3Juices.cc
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl)
 - [youtube-dl cheatsheet](https://sachithmuhandiram.medium.com/youtube-dl-cheatsheet-bcc0782e7124)
 - [tube-dl](https://pypi.org/project/tube-dl)
+- [ytmusicapi](https://ytmusicapi.readthedocs.io/en/latest/reference.html#ytmusicapi.YTMusic.get_playlist)
 
 
