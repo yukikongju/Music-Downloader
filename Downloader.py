@@ -44,11 +44,16 @@ class Downloader:
                     #  download songs
                     song_url = row["url"]
                     ydl.download([song_url])
-                    #  set isDownloaded to true
-                    #  save updated csv file
+                    self.df.loc[index, "isDownloaded"] = True
+        #  save updated csv file
+        self.save_df_to_csv()
 
     def save_df_to_csv(self):
-        pass
+        print(self.df)
+        new_file_path = self.csv_path.split(
+            ".csv")[0] + '_new' + '.csv'
+        print(new_file_path)
+        self.df.to_csv(new_file_path, sep=',', index=False)
 
 
 if __name__ == "__main__":
