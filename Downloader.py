@@ -45,7 +45,7 @@ class Downloader:
                 #  save mp3 as artist+title
                 file_name = row["artist"] + ' - ' + row["title"] + '.mp3'
                 #  self.ydl_opts["outtmpl"] = self.downloadPath + file_name
-                self.ydl_opts["outtmpl"] = 'Downloads/' + \
+                self.ydl_opts["outtmpl"] = self.downloadPath + \
                     file_name  # TO CHANGE
                 with youtube_dl.YoutubeDL(self.ydl_opts) as ydl:
                     #  download songs
@@ -72,6 +72,8 @@ class Downloader:
 
 
 if __name__ == "__main__":
-    downloader = Downloader(downloadPath="C:/Users/emuli/Downloads/",
+    #  downloader = Downloader(downloadPath="C:/Users/emuli/Downloads/",
+    #                          csv_path="Playlist/Emo kid_changes.csv")
+    downloader = Downloader(downloadPath="Downloads/",
                             csv_path="Playlist/Emo kid_changes.csv")
     downloader.download_songs()
