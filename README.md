@@ -94,5 +94,6 @@ Template: In ``main.py``
 - [youtube-dl cheatsheet](https://sachithmuhandiram.medium.com/youtube-dl-cheatsheet-bcc0782e7124)
 - [tube-dl](https://pypi.org/project/tube-dl)
 - [ytmusicapi](https://ytmusicapi.readthedocs.io/en/latest/reference.html#ytmusicapi.YTMusic.get_playlist)
+- [ytmusicapi example](https://github.com/sigma67/ytmusicapi/blob/master/tests/test.py)
 
 
