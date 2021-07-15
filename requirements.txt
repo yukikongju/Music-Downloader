@@ -1,0 +1,18 @@
+BeautifulSoup4
+pandas
+requests
+selenium
+
+# create virtual environment
+virtualenv
+python3-venv
+
+# download songs
+youtube-dl
+youtube_dl
+
+
+# using youtube-search-python plugin
+youtube-search-python
+eyed3
+moviepy
