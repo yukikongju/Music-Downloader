@@ -41,7 +41,7 @@ On Ubuntu: ``sudo apt-get install ffmpeg``
 
 Main Features:
 - [X] Download Songs from Youtube Playlist
-- [ ] Check if songs is already downloaded before downloading it
+- [X] Check if songs is already downloaded before downloading it
 
 
 More:
@@ -53,6 +53,7 @@ More:
 
 Template: In ``main.py``
 
+![image](https://user-images.githubusercontent.com/34996954/125808504-688e06b6-10c9-4b46-a6e1-fae9cb18cdd0.png)
 
 #### Step 1: Find youtube playlist to download and identify its playlist id
 
