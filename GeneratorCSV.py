@@ -1,11 +1,11 @@
 #!/usr/bin/env
 
-""" Class that generate songs/books list from playlist url """
+""" Class that generate csv file from playlist url """
 
 import requests
 
 
-class Generator:
+class GeneratorCSV:
     def __init__(self, url):
         """
         url: playlist of url

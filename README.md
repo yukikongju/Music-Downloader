@@ -35,16 +35,24 @@ Source: [How to create virtual environment in Python](https://linuxize.com/post/
 
 `` pip install -r requirements.txt``
 
+#### Step 2.5: Install ffmpeg
+
+On Windows 10: [Download ffmpeg on Windows](https://www.wikihow.com/Install-FFmpeg-on-Windows)
+or using chocolatey: ``choco install ffmpeg``
+
+On Ubuntu: ``sudo apt-get install ffmpeg``
+
+
 #### Optional: Convert Youtube url to mp3 file
 
 `` youtube-dl --extract-audio --audio-format mp3 <video URL> ``
 
 ## [Classes](#classes)
 
-- [ ] Downloader: download all songs from CSV file if they are not already downloaded
+- [X] Downloader: download all songs from CSV file if they are not already downloaded
 - [ ] Playlister: from download directory, generate playlist from csv file
-- [ ] Generator:
-- [ ] CSVManager:
+- [ ] GeneratorCSV:
+%% - [ ] CSVManager:
 
 ## [Ressources](#ressources)
 

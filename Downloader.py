@@ -1,4 +1,3 @@
-#
 # /usr/bin/env
 
 """ Class which download songs/books not in a repository from a url """
