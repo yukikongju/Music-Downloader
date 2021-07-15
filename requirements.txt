@@ -12,6 +12,10 @@ youtube-dl
 youtube_dl
 ffmpeg
 
+# create csv file from youtube playlist
+ytmusicapi
+json
+
 
 # using youtube-search-python plugin (optional)
 youtube-search-python
