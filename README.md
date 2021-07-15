@@ -1,11 +1,12 @@
 ## Music Downloader
 
-Download music from Spotify/Youtube Playlist locally using youtube-dll pluggin
+Download songs from Youtube Playlist as mp3 files using youtube-dll pluggin
 
 ## Table of Contents
 
 - [Requirements](#requirements)
 - [Features](#features)
+- [How it Works](#howitworks)
 - [Usage](#usage)
 - [Classes](#classes)
 - [Ressources](#ressources)
@@ -16,6 +17,7 @@ Download music from Spotify/Youtube Playlist locally using youtube-dll pluggin
 #### Step 1: Create virtual environment with venv
 
 `` python3 -m venv music-downloader-venv``
+
 `` source music-downloader-venv/bin/activate ``
 
 Source: [How to create virtual environment in Python](https://linuxize.com/post/how-to-create-python-virtual-environments-on-ubuntu-18-04/)
@@ -43,41 +45,39 @@ Main Features:
 - [X] Download Songs from Youtube Playlist
 - [X] Check if songs is already downloaded before downloading it
 
-
 More:
 - [ ] Download Songs from Spotify Playlist
 - [ ] Download Books
 - [ ] Download Movies
+
+## [How it Works](#howitworks)
+
+1. Choose Youtube Playlist to download and find its Playlist ID
+2. Generate CSV file with all download information with ``Downloader.py``
+3. Once we generated our csv file, we execute ``GeneratorCSV.py`` to download songs that haven't been downloaded yet
 
 ## [Usage](#usage)
 
 Template: In ``main.py``
 
 ![image](https://user-images.githubusercontent.com/34996954/125808504-688e06b6-10c9-4b46-a6e1-fae9cb18cdd0.png)
+#### Step 0: Download Requirements
 
 #### Step 1: Find youtube playlist to download and identify its playlist id
 
-`` ex: https://music.youtube.com/playlist?list=RDCLAK5uy_mykviNKPwD0nalgCmKxDkJZ3dhkDl3pSk``
+`` youtube playlist url: https://music.youtube.com/playlist?list=RDCLAK5uy_mykviNKPwD0nalgCmKxDkJZ3dhkDl3pSk``
 
-`` playlist_id: RDCLAK5uy_mykviNKPwD0nalgCmKxDkJZ3dhkDl3pSk``
+`` playlist_id = "RDCLAK5uy_mykviNKPwD0nalgCmKxDkJZ3dhkDl3pSk"``
 
-#### Step 2: Generate csv file from playlist using ``GeneratorCSV.py``
+#### Step 2: Specify path where csv file should be downloaded
 
-``generator = GeneratorCSV(playlist_id=playlist_id, csv_dir=csv_dir)``
-`` playlist_name = generator.playlist_name``
+`` csv_dir = "path/where/csv/should/be/downloaded" ``
 
-#### Step 3: Check if songs have already been downloaded with already built-in
+#### Step 3: Specify path where songs should be downloaded
 
-#### Step 4: Download the missing songs with ``Downloader.py``
+`` download_path = "path/where/songs/should/be/downloaded" ``
 
-`` downloader = Downloader(downloadPath=download_path,
-                            csv_path=csv_dir+playlist_name+'.csv')``
-
-``downloader.download_songs()``
-
-
-
-#### Step 5: Execute the script
+#### Step 4: Execute the script
 
 `` python main.py``
 

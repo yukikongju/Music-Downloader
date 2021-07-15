@@ -1,7 +1,3 @@
-BeautifulSoup4
-requests
-selenium
-
 # create virtual environment
 virtualenv
 python3-venv
