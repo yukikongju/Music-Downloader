@@ -1,4 +1,5 @@
-#!/usr/bin/env
+#
+# /usr/bin/env
 
 """ Class which download songs/books not in a repository from a url """
 
@@ -38,8 +39,10 @@ class Downloader:
             if row["isDownloaded"] == False:
                 print("Downloading " + row["artist"] + " " + row["title"])
                 #  save mp3 as artist+title
-                file_name = row["artist"] + '-' + row["title"] + '.mp3'
-                self.ydl_opts["outtmpl"] = self.downloadPath + file_name
+                file_name = row["artist"] + ' - ' + row["title"] + '.mp3'
+                #  self.ydl_opts["outtmpl"] = self.downloadPath + file_name
+                self.ydl_opts["outtmpl"] = 'Downloads/' + \
+                    file_name  # TO CHANGE
                 with youtube_dl.YoutubeDL(self.ydl_opts) as ydl:
                     #  download songs
                     song_url = row["url"]
@@ -49,10 +52,7 @@ class Downloader:
         self.save_df_to_csv()
 
     def save_df_to_csv(self):
-        print(self.df)
-        new_file_path = self.csv_path.split(
-            ".csv")[0] + '_new' + '.csv'
-        print(new_file_path)
+        new_file_path = self.csv_path.split(".csv")[0] + '_new' + '.csv'
         self.df.to_csv(new_file_path, sep=',', index=False)
 
 

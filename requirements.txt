@@ -1,5 +1,4 @@
 BeautifulSoup4
-pandas
 requests
 selenium
 
@@ -8,11 +7,13 @@ virtualenv
 python3-venv
 
 # download songs
+pandas
 youtube-dl
 youtube_dl
+ffmpeg
 
 
-# using youtube-search-python plugin
+# using youtube-search-python plugin (optional)
 youtube-search-python
 eyed3
 moviepy
