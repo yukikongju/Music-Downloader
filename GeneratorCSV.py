@@ -9,12 +9,14 @@ from ytmusicapi import YTMusic
 
 
 class GeneratorCSV:
-    def __init__(self, playlist_id):
+    def __init__(self, playlist_id, csv_dir):
         """
         playlist_id: playlist of url
         """
         self.playlist_id = playlist_id
-        self.df = self.generateDataFrameFromYoutubeMusicPlaylist()
+        self.csv_dir = csv_dir
+        self.df, self.playlist_name = self.generateDataFrameFromYoutubeMusicPlaylist()
+        self.save_df_to_csv()
 
     def generateDataFrameFromYoutubeMusicPlaylist(self):
         """ Generate List of Songs from Youtube Playlist """
@@ -51,18 +53,20 @@ class GeneratorCSV:
         # generate dataframe
         COLUMN_NAMES = ['artist', 'title', 'album', 'url', 'isDownloaded']
         df = pd.DataFrame(data, columns=COLUMN_NAMES)
-        return df
+        return df, playlist["title"]
 
     def generateListFromSpotify(self):
         """ Generate List of Songs from Spotify Playlist """
         pass
 
-    def find_song_url(self):
-        """ Find song playlist_id from youtube with key: artist+title+lyrics """
-        pass
+    def save_df_to_csv(self):  # refractor to csvManager?
+        self.df.to_csv(self.csv_dir+self.playlist_name +
+                       '.csv', sep=',', index=False)
+        return
 
 
 if __name__ == "__main__":
     playlist_id = "PLzx7xtGqjNzoahrq-AQmO7DHbJZtGqZUC"
-    generator = GeneratorCSV(playlist_id)
+    generator = GeneratorCSV(playlist_id=playlist_id,
+                             csv_dir="Playlist/")
     #  generator.generateDataFrameFromYoutubeMusicPlaylist()

@@ -50,12 +50,12 @@ class Downloader:
         #  save updated csv file
         self.save_df_to_csv()
 
-    def save_df_to_csv(self):
+    def save_df_to_csv(self):  # refractor to csv Manager?
         new_file_path = self.csv_path.split(".csv")[0] + '_new' + '.csv'
         self.df.to_csv(new_file_path, sep=',', index=False)
 
 
 if __name__ == "__main__":
     downloader = Downloader(downloadPath="C:/Users/emuli/Downloads/",
-                            csv_path="Playlist/playlists.csv")
+                            csv_path="Playlist/test.csv")
     downloader.download_songs()
