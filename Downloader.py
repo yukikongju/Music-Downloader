@@ -24,7 +24,7 @@ class Downloader:
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
-            'keepvideo': False
+            #  'keepvideo': False
         }
         self.autosave = True  # update csv file every n songs
         self.n = 8  # save file to csv every n songs

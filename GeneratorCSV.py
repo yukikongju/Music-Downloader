@@ -16,18 +16,18 @@ class GeneratorCSV:
         """
         self.playlist_id = playlist_id
         self.csv_dir = csv_dir
-        self.playlist_name = self.getYoutubePlaylistName()
+        self.playlist_name = self.fetchYoutubePlaylistName()
         self.df = None  # df is read in main
         self.track_limit = 500  # limits of tracks read from playlist
 
-    def getYoutubePlaylistName(self):
+    def fetchYoutubePlaylistName(self):
         """ function that return playlist name """
         ytmusic = YTMusic()
         playlist = ytmusic.get_playlist(
             playlistId=self.playlist_id, limit=5)
         return playlist["title"]
 
-    def generateDataFrameFromYoutubeMusicPlaylist(self):
+    def generateCSVFromYoutubeMusicPlaylist(self):
         """ Generate List of Songs from Youtube Playlist """
 
         # fetch playlist track from Youtube API
@@ -38,21 +38,26 @@ class GeneratorCSV:
         for i, track in enumerate(tracksJSON):
             # Get Track information
             artist, title, album, video_id =\
-                self.fetchTrackInformationFromYoutubeMusic(track)
+                self.getInformationFromYoutubeMusicTrack(track)
             # append row to dataframe
             if video_id != None:  # sinon, l'url n'est pas valide
-                url = "https://music.youtube.com/watch?v=" + \
-                    video_id + "list=" + self.playlist_id
+                url = self.getVideoURLFromYoutubeVideoID(video_id)
                 row = [artist, title, album, url, False]
                 data.append(row)
 
-        # generate dataframe
-        COLUMN_NAMES = ['artist', 'title', 'album', 'url', 'isDownloaded']
-        df = pd.DataFrame(data, columns=COLUMN_NAMES)
-        self.df = df
-        return df
+        # generate csv
+        self.df = self.createPlaylistDataFrame(data)
+        self.save_df_to_csv()
 
-    def fetchTrackInformationFromYoutubeMusic(self, track):
+    def createPlaylistDataFrame(self, data):
+        COLUMN_NAMES = ['artist', 'title', 'album', 'url', 'isDownloaded']
+        return pd.DataFrame(data, columns=COLUMN_NAMES)
+
+    def getVideoURLFromYoutubeVideoID(self, video_id):
+        return "https://music.youtube.com/watch?v=" + \
+            video_id + "list=" + self.playlist_id
+
+    def getInformationFromYoutubeMusicTrack(self, track):
         """ Get Track Info: artist, title, album, video_id """
         artist = track["artists"][0]["name"]
         title = track["title"]
@@ -74,32 +79,40 @@ class GeneratorCSV:
 
     def updateCSVFileFromYoutubeMusicPlaylist(self):
         """ Updating csv file with new songs in playlist """
+        # Reading csv file as dataframe
+        self.read_csv_file()
+
         # API request for tracks in playlist
         tracksJSON = self.fetchJSONTrackFromYoutubeMusicPlaylistID()
 
         # create new data to append
-        data = []
+        new_data = []
         for index, track in enumerate(tracksJSON):
             # get url of songs
             video_id = track["videoId"]
             if video_id != None:  # sinon, l'url n'est pas valide
-                url = "https://music.youtube.com/watch?v=" + \
-                    video_id + "list=" + self.playlist_id
+                url = self.getVideoURLFromYoutubeVideoID(video_id)
             else:
                 continue
+
             # check if track exists in data frame
-            if url not in self.df.url:
-                print("song doesnt exist. add it to dataframe")
+            if url not in self.df["url"].values:
                 # fetch track information
-        pass
+                artist, title, album, video_id =\
+                    self.getInformationFromYoutubeMusicTrack(track)
+                row = [artist, title, album, url, False]
+                new_data.append(row)
+                print("Added: " + artist + " - " + title)
+
+        # update csv file
+        newDF = self.createPlaylistDataFrame(new_data)
+        frames = [self.df, newDF]
+        self.df = pd.concat(frames)  # concat old with new songs
+        self.save_df_to_csv()
 
     def generateDataFrameFromSpotifyPlaylist(self):
         """ Generate Data Frame of Songs from Spotify Playlist """
-        # request playlist information from Spotify API
-        #  spotify = spotify.Spotify()
-        # generate data
-        # generate csv file from data frame
-        return 1, 1  # df, playlist_name
+        pass
 
     def find_download_url_from_spotify_track(self):
         """docstring for find_download_url_from_spotify_track"""
@@ -116,7 +129,6 @@ class GeneratorCSV:
 
 
 if __name__ == "__main__":
-    #  TO CHANGE
     playlist_id = "PLzx7xtGqjNzoahrq-AQmO7DHbJZtGqZUC"
     generator = GeneratorCSV(playlist_id=playlist_id,
                              csv_dir="Playlist/")

@@ -8,25 +8,23 @@ from os import path
 
 def main():
     # Step 1: Identify playlist to download and download directories
-    playlist_id = "PLzx7xtGqjNzoElKjq_zmpzgoS8RNrqHYh"
+    playlist_id = "RDCLAK5uy_mykviNKPwD0nalgCmKxDkJZ3dhkDl3pSk"
     csv_dir = "Playlist/"
     download_path = "Downloads/"  # "C:/path/to/download"
 
     # Step 2: Generate CSV file from playlist if it doesn't exist
-    # need to check if csv file has already been generated
     generator = GeneratorCSV(playlist_id=playlist_id, csv_dir=csv_dir)
-    playlist_name = generator.getYoutubePlaylistName()
-    print(playlist_name)
+    playlist_name = generator.playlist_name
     # check if playlist is in csv dir
-    if path.exists(csv_dir+playlist_name+'.csv'):  # read df from csv_path
-        print("csv file exists. Reading...")
-        # read playlist (optional)
-        #  generator.read_csv_file() # TO TEST
+    csv_path = csv_dir+playlist_name+'.csv'
+    if path.exists(csv_path):  # Update csv file with new songs
+        print(csv_path + " already exists. Updating with new tracks...")
+        generator.updateCSVFileFromYoutubeMusicPlaylist()
+        print(csv_path + " has been updated.")
     else:
-        print("csv file doesn't exists. Creating...")
-        generator.generateDataFrameFromYoutubeMusicPlaylist()
-        generator.save_df_to_csv()
-        print("csv file created in "+csv_dir+playlist_name+'.csv')
+        print(csv_path + " doesn't exists. Creating...")
+        generator.generateCSVFromYoutubeMusicPlaylist()
+        print("csv file created in " + csv_dir + playlist_name + '.csv')
 
     # Step 3: Dowload the songs
     downloader = Downloader(downloadPath=download_path,
