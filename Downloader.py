@@ -31,7 +31,7 @@ class Downloader:
 
     def read_csv_file(self):  # refractor in CSVManager?
         """docstring for read_csv_file"""
-        self.df = pd.read_csv(self.csv_path, sep=',')
+        df = pd.read_csv(self.csv_path, sep=',')
         return df  # redundant?
 
     def download_songs(self):
