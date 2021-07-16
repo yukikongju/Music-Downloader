@@ -42,11 +42,13 @@ On Ubuntu: ``sudo apt-get install ffmpeg``
 ## [Features](#features)
 
 Main Features:
-- [X] Download Songs from Youtube Playlist
 - [X] Check if songs is already downloaded before downloading it
+- [X] Download Songs from Youtube Playlist
+- [ ] Download Songs from Spotify Playlist
+- [ ] Copy Playlist from Youtube to Spotify
+- [ ] Copy Playlist from Spotify to Youtube
 
 More:
-- [ ] Download Songs from Spotify Playlist
 - [ ] Download Books
 - [ ] Download Movies
 

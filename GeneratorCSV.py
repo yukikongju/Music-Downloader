@@ -5,6 +5,7 @@
 import json
 import pandas as pd
 import requests
+import spotipy
 from ytmusicapi import YTMusic
 
 
@@ -15,8 +16,17 @@ class GeneratorCSV:
         """
         self.playlist_id = playlist_id
         self.csv_dir = csv_dir
-        self.df, self.playlist_name = self.generateDataFrameFromYoutubeMusicPlaylist()
-        self.save_df_to_csv()
+        self.playlist_name = self.getYoutubePlaylistName()
+        self.df = None  # df is read in main
+        #  self.df = self.generateDataFrameFromYoutubeMusicPlaylist()
+        #  self.save_df_to_csv()
+
+    def getYoutubePlaylistName(self):
+        """ function that return playlist name """
+        ytmusic = YTMusic()
+        playlist = ytmusic.get_playlist(
+            playlistId=self.playlist_id, limit=5)
+        return playlist["title"]
 
     def generateDataFrameFromYoutubeMusicPlaylist(self):
         """ Generate List of Songs from Youtube Playlist """
@@ -48,25 +58,40 @@ class GeneratorCSV:
                     video_id + "list=" + self.playlist_id
                 row = [artist, title, album, url, isDownloaded]
                 data.append(row)
-            #  df.loc[i] = row  # DONT APPEND DIRECTLY: Too slow
 
         # generate dataframe
         COLUMN_NAMES = ['artist', 'title', 'album', 'url', 'isDownloaded']
         df = pd.DataFrame(data, columns=COLUMN_NAMES)
-        return df, playlist["title"]
+        self.df = df
+        return df
 
-    def generateListFromSpotify(self):
-        """ Generate List of Songs from Spotify Playlist """
+    def generateDataFrameFromSpotifyPlaylist(self):
+        """ Generate Data Frame of Songs from Spotify Playlist """
+        # request playlist information from Spotify API
+        #  spotify = spotify.Spotify()
+        # generate data
+        # generate csv file from data frame
+        return 1, 1  # df, playlist_name
+
+    def find_download_url_from_spotify_track(self):
+        """docstring for find_download_url_from_spotify_track"""
         pass
+
+    def read_csv_file(self):
+        """docstring for read_csv"""
+        csv_path = self.csv_dir + self.playlist_name + '.csv'
+        print(csv_path)
+        self.df = pd.read_csv(csv_path, sep=',')
 
     def save_df_to_csv(self):  # refractor to csvManager?
         self.df.to_csv(self.csv_dir+self.playlist_name +
                        '.csv', sep=',', index=False)
-        return
 
 
 if __name__ == "__main__":
+    #  TO CHANGE
     playlist_id = "PLzx7xtGqjNzoahrq-AQmO7DHbJZtGqZUC"
     generator = GeneratorCSV(playlist_id=playlist_id,
                              csv_dir="Playlist/")
-    #  generator.generateDataFrameFromYoutubeMusicPlaylist()
+    df = generator.generateDataFrameFromYoutubeMusicPlaylist()
+    generator.save_df_to_csv()

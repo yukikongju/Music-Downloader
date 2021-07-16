@@ -27,12 +27,12 @@ class Downloader:
             'keepvideo': False
         }
         self.autosave = True  # update csv file every n songs
-        self.n = 10  # save file to csv every n songs
+        self.n = 8  # save file to csv every n songs
 
     def read_csv_file(self):  # refractor in CSVManager?
         """docstring for read_csv_file"""
-        df = pd.read_csv(self.csv_path, sep=',')
-        return df
+        self.df = pd.read_csv(self.csv_path, sep=',')
+        return df  # redundant?
 
     def download_songs(self):
         """ Download songs if it hasn't been downloaded before """
@@ -41,12 +41,10 @@ class Downloader:
         # download missing songs
         for index, row in self.df.iterrows():
             if row["isDownloaded"] == False:
-                print("Downloading " + row["artist"] + " " + row["title"])
+                print("Downloading " + row["artist"] + " - " + row["title"])
                 #  save mp3 as artist+title
                 file_name = row["artist"] + ' - ' + row["title"] + '.mp3'
-                #  self.ydl_opts["outtmpl"] = self.downloadPath + file_name
-                self.ydl_opts["outtmpl"] = self.downloadPath + \
-                    file_name  # TO CHANGE
+                self.ydl_opts["outtmpl"] = self.downloadPath + file_name
                 with youtube_dl.YoutubeDL(self.ydl_opts) as ydl:
                     #  download songs
                     song_url = row["url"]

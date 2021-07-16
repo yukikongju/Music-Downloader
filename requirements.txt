@@ -12,6 +12,9 @@ ffmpeg
 ytmusicapi
 json
 
+# create csv file from spotify playlist
+spotipy
+
 
 # using youtube-search-python plugin (optional)
 youtube-search-python
