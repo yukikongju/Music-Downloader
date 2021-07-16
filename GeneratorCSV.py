@@ -30,16 +30,12 @@ class GeneratorCSV:
     def generateDataFrameFromYoutubeMusicPlaylist(self):
         """ Generate List of Songs from Youtube Playlist """
 
-        # API request for Youtube Music
-        ytmusic = YTMusic()
-        playlist = ytmusic.get_playlist(
-            playlistId=self.playlist_id, limit=self.track_limit)
-        # json file of tracks: https://ytmusicapi.readthedocs.io/en/latest/reference.html
-        tracks = playlist["tracks"]
+        # fetch playlist track from Youtube API
+        tracksJSON = self.fetchJSONTrackFromYoutubeMusicPlaylistID()
 
         # Generate all the rows: we want to generate data and then create data frame because it is faster: https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-then-filling-it
         data = []
-        for i, track in enumerate(tracks):
+        for i, track in enumerate(tracksJSON):
             # Get Track information
             artist, title, album, video_id =\
                 self.fetchTrackInformationFromYoutubeMusic(track)
@@ -67,17 +63,23 @@ class GeneratorCSV:
         video_id = track["videoId"]
         return artist, title, album, video_id
 
-    def updateCSVFileFromYoutubeMusicPlaylist(self):
-        """docstring for updateCSVFileFromYoutubeMusicPlaylist"""
-        # API request for tracks in playlist
+    def fetchJSONTrackFromYoutubeMusicPlaylistID(self):
+        """ fetch all track from youtube playlist id
+            ref -> https://ytmusicapi.readthedocs.io/en/latest/reference.html
+        """
         ytmusic = YTMusic()
         playlist = ytmusic.get_playlist(
             playlistId=self.playlist_id, limit=self.track_limit)
-        tracks = playlist["tracks"]
+        return playlist["tracks"]
+
+    def updateCSVFileFromYoutubeMusicPlaylist(self):
+        """ Updating csv file with new songs in playlist """
+        # API request for tracks in playlist
+        tracksJSON = self.fetchJSONTrackFromYoutubeMusicPlaylistID()
 
         # create new data to append
         data = []
-        for index, track in enumerate(tracks):
+        for index, track in enumerate(tracksJSON):
             # get url of songs
             video_id = track["videoId"]
             if video_id != None:  # sinon, l'url n'est pas valide
