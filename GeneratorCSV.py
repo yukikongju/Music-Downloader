@@ -18,8 +18,7 @@ class GeneratorCSV:
         self.csv_dir = csv_dir
         self.playlist_name = self.getYoutubePlaylistName()
         self.df = None  # df is read in main
-        #  self.df = self.generateDataFrameFromYoutubeMusicPlaylist()
-        #  self.save_df_to_csv()
+        self.track_limit = 500  # limits of tracks read from playlist
 
     def getYoutubePlaylistName(self):
         """ function that return playlist name """
@@ -34,29 +33,21 @@ class GeneratorCSV:
         # API request for Youtube Music
         ytmusic = YTMusic()
         playlist = ytmusic.get_playlist(
-            playlistId=self.playlist_id, limit=500)
+            playlistId=self.playlist_id, limit=self.track_limit)
         # json file of tracks: https://ytmusicapi.readthedocs.io/en/latest/reference.html
         tracks = playlist["tracks"]
-        #  print(playlist["id"])
 
         # Generate all the rows: we want to generate data and then create data frame because it is faster: https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-then-filling-it
         data = []
         for i, track in enumerate(tracks):
-            # Get Meta Data
-            artist = track["artists"][0]["name"]
-            title = track["title"]
-            if track["album"] != None:
-                album = track["album"]["name"]
-            else:
-                album = None
-            #  duration = track["duration"] # TO FIX: duration has bug
-            video_id = track["videoId"]
-            isDownloaded = False  # TODO: check if song is already downloaded
+            # Get Track information
+            artist, title, album, video_id =\
+                self.fetchTrackInformationFromYoutubeMusic(track)
             # append row to dataframe
             if video_id != None:  # sinon, l'url n'est pas valide
                 url = "https://music.youtube.com/watch?v=" + \
                     video_id + "list=" + self.playlist_id
-                row = [artist, title, album, url, isDownloaded]
+                row = [artist, title, album, url, False]
                 data.append(row)
 
         # generate dataframe
@@ -64,6 +55,41 @@ class GeneratorCSV:
         df = pd.DataFrame(data, columns=COLUMN_NAMES)
         self.df = df
         return df
+
+    def fetchTrackInformationFromYoutubeMusic(self, track):
+        """ Get Track Info: artist, title, album, video_id """
+        artist = track["artists"][0]["name"]
+        title = track["title"]
+        if track["album"] != None:
+            album = track["album"]["name"]
+        else:
+            album = None
+        video_id = track["videoId"]
+        return artist, title, album, video_id
+
+    def updateCSVFileFromYoutubeMusicPlaylist(self):
+        """docstring for updateCSVFileFromYoutubeMusicPlaylist"""
+        # API request for tracks in playlist
+        ytmusic = YTMusic()
+        playlist = ytmusic.get_playlist(
+            playlistId=self.playlist_id, limit=self.track_limit)
+        tracks = playlist["tracks"]
+
+        # create new data to append
+        data = []
+        for index, track in enumerate(tracks):
+            # get url of songs
+            video_id = track["videoId"]
+            if video_id != None:  # sinon, l'url n'est pas valide
+                url = "https://music.youtube.com/watch?v=" + \
+                    video_id + "list=" + self.playlist_id
+            else:
+                continue
+            # check if track exists in data frame
+            if url not in self.df.url:
+                print("song doesnt exist. add it to dataframe")
+                # fetch track information
+        pass
 
     def generateDataFrameFromSpotifyPlaylist(self):
         """ Generate Data Frame of Songs from Spotify Playlist """
@@ -80,7 +106,6 @@ class GeneratorCSV:
     def read_csv_file(self):
         """docstring for read_csv"""
         csv_path = self.csv_dir + self.playlist_name + '.csv'
-        print(csv_path)
         self.df = pd.read_csv(csv_path, sep=',')
 
     def save_df_to_csv(self):  # refractor to csvManager?
