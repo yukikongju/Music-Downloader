@@ -7,7 +7,7 @@ import pandas as pd
 
 
 class Downloader:
-    def __init__(self, downloadPath, csv_path):
+    def __init__(self, downloadPath: str, csv_path: str):
         """
         downloadPath: absolute path where files should be downloaded
         df: dataframe of the songs that should be downloaded
@@ -29,12 +29,12 @@ class Downloader:
         self.autosave = True  # update csv file every n songs
         self.n = 8  # save file to csv every n songs
 
-    def read_csv_file(self):  # refractor in CSVManager?
+    def read_csv_file(self) -> list:  # refractor in CSVManager?
         """docstring for read_csv_file"""
         df = pd.read_csv(self.csv_path, sep=',')
         return df  # redundant?
 
-    def download_songs(self):
+    def download_songs(self) -> None:
         """ Download songs if it hasn't been downloaded before """
         # verify if songs have been downloaded
 
@@ -64,14 +64,15 @@ class Downloader:
         #  save updated csv file
         self.save_df_to_csv()
 
-    def save_df_to_csv(self):  # refractor to csv Manager?
-        #  new_file_path = self.csv_path.split(".csv")[0] + '_new' + '.csv'
+    def save_df_to_csv(self) -> None:  # refractor to csv Manager?
         self.df.to_csv(self.csv_path, sep=',', index=False)
 
 
-if __name__ == "__main__":
-    #  downloader = Downloader(downloadPath="C:/Users/emuli/Downloads/",
-    #                          csv_path="Playlist/Emo kid_changes.csv")
+def main() -> None:
     downloader = Downloader(downloadPath="Downloads/",
                             csv_path="Playlist/Emo kid_changes.csv")
     downloader.download_songs()
+
+
+if __name__ == "__main__":
+    main()
