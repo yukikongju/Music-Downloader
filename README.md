@@ -1,18 +1,8 @@
-## Music Downloader
+# Music Downloader
 
 Download songs from Youtube Playlist as mp3 files using youtube-dll pluggin
 
-## Table of Contents
-
-- [Requirements](#requirements)
-- [Features](#features)
-- [How it Works](#howitworks)
-- [Usage](#usage)
-- [Classes](#classes)
-- [Ressources](#ressources)
-
-## [Requirements](#requirements)
-
+## Prerequisites
 
 #### Step 1: Create virtual environment with venv
 
@@ -39,7 +29,9 @@ On Ubuntu: ``sudo apt-get install ffmpeg``
 `` youtube-dl --extract-audio --audio-format mp3 <video URL> ``
 
 
-## [Features](#features)
+
+
+## Features
 
 Main Features:
 - [X] Check if songs is already downloaded before downloading it
@@ -47,18 +39,19 @@ Main Features:
 - [ ] Download Songs from Spotify Playlist
 - [ ] Copy Playlist from Youtube to Spotify
 - [ ] Copy Playlist from Spotify to Youtube
+- [X] Created Docker Container using: `sudo docker build -t ubuntu-test:latest .`
 
 More:
 - [ ] Download Books
 - [ ] Download Movies
 
-## [How it Works](#howitworks)
+## How it Works
 
 1. Choose Youtube Playlist to download and find its Playlist ID
 2. Generate CSV file with all download information with ``Downloader.py``
 3. Once we generated our csv file, we execute ``GeneratorCSV.py`` to download songs that haven't been downloaded yet
 
-## [Usage](#usage)
+## Usage
 
 Template: In ``main.py``
 
@@ -84,18 +77,20 @@ Template: In ``main.py``
 `` python main.py``
 
 
-## [Classes](#classes)
+## Classes
 
 - [X] Downloader: download all songs from CSV file if they are not already downloaded
 - [X] GeneratorCSV: generate csv file with playlist meta data from youtube music playlist
 - [ ] Playlister: from download directory, generate playlist from csv file
 
-## [Ressources](#ressources)
+## Ressources
 
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl)
 - [youtube-dl cheatsheet](https://sachithmuhandiram.medium.com/youtube-dl-cheatsheet-bcc0782e7124)
 - [tube-dl](https://pypi.org/project/tube-dl)
 - [ytmusicapi](https://ytmusicapi.readthedocs.io/en/latest/reference.html#ytmusicapi.YTMusic.get_playlist)
 - [ytmusicapi example](https://github.com/sigma67/ytmusicapi/blob/master/tests/test.py)
+- [Downloading audio only](https://itsfoss.com/youtube-dl-audio-only/)
+- [How to download entire Youtube playlist](https://www.reddit.com/r/software/comments/9lxktm/how_to_download_entire_youtube_playlist/)
 
 

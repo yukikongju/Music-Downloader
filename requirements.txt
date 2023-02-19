@@ -1,22 +1,9 @@
-# create virtual environment
-virtualenv
-python3-venv
-
-# download songs
 pandas
 youtube-dl
 youtube_dl
 ffmpeg
-
-# create csv file from youtube playlist
 ytmusicapi
-json
-
-# create csv file from spotify playlist
 spotipy
-
-
-# using youtube-search-python plugin (optional)
 youtube-search-python
 eyed3
 moviepy
