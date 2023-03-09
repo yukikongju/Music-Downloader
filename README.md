@@ -92,5 +92,6 @@ Template: In ``main.py``
 - [ytmusicapi example](https://github.com/sigma67/ytmusicapi/blob/master/tests/test.py)
 - [Downloading audio only](https://itsfoss.com/youtube-dl-audio-only/)
 - [How to download entire Youtube playlist](https://www.reddit.com/r/software/comments/9lxktm/how_to_download_entire_youtube_playlist/)
+- [Makefile](https://pawamoy.github.io/posts/pass-makefile-args-as-typed-in-command-line/)
 
 
