@@ -29,6 +29,7 @@ On Ubuntu: ``sudo apt-get install ffmpeg``
 `` youtube-dl --extract-audio --audio-format mp3 <video URL> ``
 
 
+`youtube-dl -x --audio-format mp3 --output "%(uploader)s - %(title)s.%(ext)s" <video-URL>`
 
 
 ## Features
