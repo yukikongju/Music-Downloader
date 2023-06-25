@@ -52,7 +52,7 @@ def download_like_songs(download_abs_path: str, songs_path: str):
 
 
 def main():
-    SONGS_PATH = 'songs/songs4.txt'
+    SONGS_PATH = 'songs/songs5.txt'
     #  YTMusic.setup(filepath="headers_auth.json") # edit headers 
     #  save_songs_url('headers_auth.json', SONGS_PATH, 500)
     download_like_songs('/home/yukikongju/Downloads/', songs_path=SONGS_PATH)

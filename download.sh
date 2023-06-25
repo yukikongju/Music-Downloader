@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file='songs/songs4.txt'
+file='songs/songs5.txt'
 
 while IFS= read -r line; do
     echo "Downloading $line"
