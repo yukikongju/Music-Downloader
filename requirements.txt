@@ -7,3 +7,4 @@ spotipy
 youtube-search-python
 eyed3
 moviepy
+pexpect

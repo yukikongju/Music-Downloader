@@ -5,7 +5,7 @@
 import json
 import pandas as pd
 import requests
-import spotipy
+#  import spotipy
 from ytmusicapi import YTMusic
 
 
@@ -19,7 +19,7 @@ class GeneratorCSV:
         self.playlist_name = self.fetchYoutubePlaylistName()
         self.csv_path = f"{self.csv_dir}{self.playlist_name}.csv"
         self.df = None  # df is read in main
-        self.track_limit = 500  # limits of tracks read from playlist
+        self.track_limit = 2500  # limits of tracks read from playlist
 
     def fetchYoutubePlaylistName(self) -> list:
         """ function that return playlist name """

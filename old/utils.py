@@ -24,15 +24,13 @@ def save_songs_url(headers_file, output_file, num_songs = 100):
             f.write(f"{url}\n")
 
 
-
-
 def download_like_songs():
     pass
 
 
 def main():
     #  YTMusic.setup(filepath="headers_auth.json") # edit headers 
-    save_songs_url('headers_auth.json', 'songs2.txt', 500)
+    save_songs_url('headers_auth.json', 'songs3.txt', 500)
 
     
 
