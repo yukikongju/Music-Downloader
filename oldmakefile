@@ -1,0 +1,41 @@
+.PHONY: 
+download_liked_songs: 
+	# make headers
+	# generate songs.txt
+	python3 main.py
+	# download using scripts
+	./download.sh
+	# echo $(PLAYLIST_ID) $(DATEAFTER)
+
+
+# test: 
+#         youtube-dl --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" playlist_URL
+
+
+youtube_playlist=https://music.youtube.com/playlist?list=PLzx7xtGqjNzo5-L7RCEZEP9cOLlYBQrH1
+songs_file=songs11.txt
+
+
+download_playlist:
+	youtube-dl --skip-download --get-id --get-title -i $(youtube_playlist) >> $(songs_file)
+
+videos_selection:
+	youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata --playlist-start 1 --playlist-end 20 -o "%(uploader)s - %(title)s.%(ext)s" $(youtube_playlist)
+
+
+
+dump:
+	# youtube-dl -x --audio-format mp3 --audio-quality 320K $(youtube_playlist)
+	# youtube-dl -i -o -x --audio-format mp3 --audio-quality 320K "%(playlist_index)s - %(title)s.%(ext)s" <playlist URL>
+	# youtube-dl --playlist-items 1,3,5,7- <playlist URL>
+	# youtube-dl -x --audio-format mp3 --audio-quality 320K --embed-thumbnail --add-metadata -o "%(uploader)s - %(title)s.%(ext)s" $(youtube_playlist)
+	# youtube-dl --skip-download --get-url --get-title --get-filename --skip-unavailable-fragments --ignore-errors -i -o "%(url)s, %(title)s, %(uploader)s" -a $(youtube_playlist) > $(songs_file)
+	# youtube-dl --skip-download --get-id --get-title --ignore-errors -i "%(url)s, %(title)s, %(uploader)s"  $(youtube_playlist) > $(songs_file)
+	# youtube-dl --skip-download --get-id --get-title --get-filename --ignore-errors -i $(youtube_playlist) > $(songs_file)
+	# youtube-dl --skip-download --get-id --get-title -o "%(url)s, %(uploader)s - %(title)s.%(ext)s"  $(youtube_playlist) > $(songs_file)
+	# youtube-dl --flat-playlist $(youtube_playlist)
+
+download_from_playlist:
+	youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(uploader)s - %(title)s.%(ext)s" $(youtube_playlist)
+
+

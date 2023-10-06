@@ -1,9 +1,9 @@
 {
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/110.0",
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0",
     "Accept": "*/*",
-    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3",
     "Content-Type": "application/json",
     "X-Goog-AuthUser": "0",
     "x-origin": "https://music.youtube.com",
-    "Cookie" : "VISITOR_INFO1_LIVE=AygWdtftm6s; SID=TwiKrexAWYoxSHGgg8HBq2mI_Ip_QecXQKfxoKnKtaYM0FqFgtIyb61aBoFEVDB4tI21OQ.; __Secure-1PSID=TwiKrexAWYoxSHGgg8HBq2mI_Ip_QecXQKfxoKnKtaYM0FqFyGPpEDGHHRwnc3YyXy1hdg.; __Secure-3PSID=TwiKrexAWYoxSHGgg8HBq2mI_Ip_QecXQKfxoKnKtaYM0FqFeWXYgZDf8_0PCWsExOsKMg.; HSID=AfcUYC1NIONREFnbC; SSID=ALeX3r8gh8y2R4DOr; APISID=tYdgVBgL4cHbfAL1/A75pNJK_rm5WUN6dP; SAPISID=HzdP6tEcWP1Ak-CJ/AYSiDXV2ZN0SKtrhE; __Secure-1PAPISID=HzdP6tEcWP1Ak-CJ/AYSiDXV2ZN0SKtrhE; __Secure-3PAPISID=HzdP6tEcWP1Ak-CJ/AYSiDXV2ZN0SKtrhE;"
+    "Cookie" : "VISITOR_INFO1_LIVE=AygWdtftm6s; SID=agiKreRFhVHw4YSJFBamdDxAysZvQA6DRUh3xmDGWT0E1prnirJ2YjGAyfx64JhmSrqkIA.; __Secure-1PSID=agiKreRFhVHw4YSJFBamdDxAysZvQA6DRUh3xmDGWT0E1prndI-QzGWCtnR63OSsdppGvw.; __Secure-3PSID=agiKreRFhVHw4YSJFBamdDxAysZvQA6DRUh3xmDGWT0E1prnyyELP6bN4RT6B6wwNeUIMw.; HSID=A5zLEJvq9ibw6AorY; SSID=AnH0k34i-GyPa__4I; APISID=MSDPdjzx24XYlNED/ANt7jNWadNPrRQpXr; SAPISID=h2PQ6s_LcT-T0iPJ/AAql-1j3Ow1TPSfNo; __Secure-1PAPISID=h2PQ6s_LcT-T0iPJ/AAql-1j3Ow1TPSfNo; __Secure-3PAPISID=h2PQ6s_LcT-T0iPJ/AAq...-1PSIDCC=APoG2W9eT8aipjm9769yKPySPkYFrrUfoAdxOU4zZc5q_-e8NLTM2HFF_Zt4B1X3Eswe5FJ-f7U; "
 }

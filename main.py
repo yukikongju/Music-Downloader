@@ -6,6 +6,7 @@ import pexpect
 from ytmusicapi import YTMusic
 
 YOUTUBE_SONG_BASE_URL = "https://music.youtube.com/watch?v="
+#  YOUTUBE_SONG_BASE_URL = "https://music.youtube.com/embed/"
 
 def get_songs_url_from_liked_videos(headers_file, num_songs):
     """ 
@@ -18,6 +19,7 @@ def get_songs_url_from_liked_videos(headers_file, num_songs):
     for track in tracks:
         videoid = track['videoId']
         url = f"{YOUTUBE_SONG_BASE_URL}{videoid}"
+        #  url = f"{YOUTUBE_SONG_BASE_URL}{videoid}?html5=1"
         songs_urls.append(url)
     return songs_urls
 
@@ -52,10 +54,10 @@ def download_like_songs(download_abs_path: str, songs_path: str):
 
 
 def main():
-    SONGS_PATH = 'songs/songs5.txt'
+    SONGS_PATH = 'songs/songs10.txt'
     #  YTMusic.setup(filepath="headers_auth.json") # edit headers 
-    #  save_songs_url('headers_auth.json', SONGS_PATH, 500)
-    download_like_songs('/home/yukikongju/Downloads/', songs_path=SONGS_PATH)
+    save_songs_url('headers_auth.json', SONGS_PATH, 500)
+    #  download_like_songs('/home/yukikongju/Downloads/', songs_path=SONGS_PATH)
 
     
 
