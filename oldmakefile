@@ -34,6 +34,8 @@ dump:
 	# youtube-dl --skip-download --get-id --get-title --get-filename --ignore-errors -i $(youtube_playlist) > $(songs_file)
 	# youtube-dl --skip-download --get-id --get-title -o "%(url)s, %(uploader)s - %(title)s.%(ext)s"  $(youtube_playlist) > $(songs_file)
 	# youtube-dl --flat-playlist $(youtube_playlist)
+	# youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata --playlist-start $(start_num) --playlist-end $(end_num) -o "%(uploader)s - %(title)s.%(ext)s" $(youtube_playlist)
+	# youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata --playlist-start $(start_num) --playlist-end $(end_num) -o "%(uploader)s - %(title)s.%(ext)s" --match-title "^(?!(.* - Topic)).*" $(youtube_playlist)
 
 download_from_playlist:
 	youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(uploader)s - %(title)s.%(ext)s" $(youtube_playlist)
