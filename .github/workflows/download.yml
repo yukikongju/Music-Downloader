@@ -1,0 +1,39 @@
+name: Download Playlist and Liked Songs from Youtube
+on: 
+schedule:
+  - cron: '0 18 * * 1,3,5'
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  setup:
+    name: Environment Setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install Python Requirements
+        run: pip install -r requirements.txt
+
+  download:
+    name: Download Playlist and (liked songs)
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Downloading Thuggy Playlist
+        run: make download_songs_from_playlist youtube_playlist=https://music.youtube.com/playlist?list=PLzx7xtGqjNzo5-L7RCEZEP9cOLlYBQrH1
+      # - name: Downloading Sweet Playlist
+      # - name: Downloading ESCAPADE Playlist
+      # - name: Downloading Emo Kid Playlist
+      # - name: Downloading Anime Playlist
+      # - name: Download Liked Songs from user auth
+      # - name: Move File into Download directory
+      # - name: Upload archive.txt as artifact
+
+
+
+

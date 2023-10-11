@@ -1,11 +1,2 @@
 pandas
 youtube-dl
-youtube_dl
-ffmpeg
-ytmusicapi
-spotipy
-youtube-search-python
-eyed3
-moviepy
-pexpect
-pydrive
