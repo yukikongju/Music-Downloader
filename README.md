@@ -20,6 +20,7 @@ computer
 
 - [Github Actions Pro Tips](https://www.youtube.com/watch?v=47zYGHwXPmE&list=PLtvmFy4Ed_DL4Vd2uup0ZT6o_HFSaF-yW)
 - [Github Actions: BUild end to end CI/CD capabilities](https://www.youtube.com/watch?v=WQMz0AnJ6uU&list=PLtvmFy4Ed_DIDu2cKP3NerA7Z-bPGYkiw)
+- [Enabling and Disabling Github Workflows](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow)
 - [virtualzone/onedrive-uploader](https://github.com/virtualzone/onedrive-uploader)
 
 

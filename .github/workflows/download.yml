@@ -18,6 +18,10 @@ jobs:
           python-version: '3.10'
       - name: Install Python Requirements
         run: pip install -r requirements.txt
+      - name: install youtube-dl dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y youtube-dl ffmpeg
 
   download:
     name: Download Playlist and Liked songs + Store
