@@ -20,19 +20,37 @@ jobs:
         run: pip install -r requirements.txt
 
   download:
-    name: Download Playlist and (liked songs)
+    name: Download Playlist and Liked songs + Store
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Downloading Thuggy Playlist
-        run: make download_songs_from_playlist youtube_playlist=https://music.youtube.com/playlist?list=PLzx7xtGqjNzo5-L7RCEZEP9cOLlYBQrH1
-      # - name: Downloading Sweet Playlist
-      # - name: Downloading ESCAPADE Playlist
-      # - name: Downloading Emo Kid Playlist
-      # - name: Downloading Anime Playlist
+      - uses: actions/checkout@v4
+      - name: Downloading Playlists
+        run: |
+          cp archive.txt tmp_archive.txt
+          echo "Downloading 'ESCAPADE' Playlist"
+          make download_songs_from_playlist youtube_playlist=https://music.youtube.com/playlist?list=PLzx7xtGqjNzo5-L7RCEZEP9cOLlYBQrH1
+          # echo "Downloading 'Sweet' Playlist"
+          # echo "Downloading 'Emo Kid' Playlist"
+          # echo "Downloading 'Thuggy' Playlist"
+          # echo "Downloading 'Anime' Playlist"
       # - name: Download Liked Songs from user auth
-      # - name: Move File into Download directory
-      # - name: Upload archive.txt as artifact
+      - name: Move File into Download directory
+        run: |
+          mkdir downloads
+          mv *.mp3 downloads
+          ls downloads
+      - name: Update archive.txt file
+        run: |
+          echo "Number of songs downloaded: "
+          diff --unchanged-group-format='' archive.txt tmp_archive.txt | wc -l
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add archive.txt
+          git commit -m 'updated archive file'
+          git push
+      # - name: Upload downloaded songs [ TODO ]
+
 
 
 
