@@ -18,10 +18,15 @@ jobs:
           python-version: '3.10'
       - name: Install Python Requirements
         run: pip install -r requirements.txt
-      - name: install youtube-dl dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y youtube-dl ffmpeg
+      - name: Setup ffmpeg
+        uses: AnimMouse/setup-ffmpeg@v1
+      - name: Setup youtube-dl
+        uses: AnimMouse/setup-youtube-dl@v1
+      # - name: install youtube-dl dependencies
+        # run: |
+        #   sudo apt-get update
+        #   sudo apt-get install -y youtube-dl ffmpeg
+        #   which youtube-dl
 
   download:
     name: Download Playlist and Liked songs + Store
@@ -54,8 +59,3 @@ jobs:
           git commit -m 'updated archive file'
           git push
       # - name: Upload downloaded songs [ TODO ]
-
-
-
-
-
