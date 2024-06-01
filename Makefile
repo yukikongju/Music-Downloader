@@ -29,3 +29,8 @@ download_songs_from_playlist:
 # get video size and download time [ FIXME ]
 # youtube-dl -j video_url | gron | grep '^json\.formats\[.\+\]\.filesize = ' | grep -v 'null' | sed 's/^json\.formats\[.*\]\.filesize = //; s/;$/ bytes/' | sort -n
 
+
+download_from_liked_videos:
+	yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(uploader)s - %(title)s.%(ext)s" --match-title "^(?!(.* - Topic)).*" --download-archive archive.txt --cookies-from-browser firefox https://www.youtube.com/playlist?list=LL
+
+
